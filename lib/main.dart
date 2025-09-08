@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:test/screens/homescreen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(TodoApp());
-
 }
 
 class TodoApp extends StatelessWidget {
@@ -13,7 +13,14 @@ class TodoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Todo App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.purpleAccent,
+        ),
+      ),
+
+      debugShowCheckedModeBanner: false,
       home: Homescreen(),
     );
   }

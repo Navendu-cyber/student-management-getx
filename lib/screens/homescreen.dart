@@ -5,6 +5,16 @@ class Homescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Student List '),
+        actions: [Icon(Icons.search)],
+        backgroundColor: Colors.purpleAccent,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Icon(Icons.add),
+      ),
+    );
   }
 }
