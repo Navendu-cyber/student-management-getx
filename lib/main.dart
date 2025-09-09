@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:test/database/hive_setup.dart';
 import 'package:test/screens/homescreen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initialiseHive();
   runApp(TodoApp());
 }
 
@@ -11,7 +14,7 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Todo App',
       theme: ThemeData(
         primarySwatch: Colors.purple,
