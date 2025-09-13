@@ -19,18 +19,28 @@ class StudentController extends GetxController {
     super.onClose();
   }
 
-  void addStudent(
+  addStudent(
     String name,
     int age,
     int studentId,
     String course,
     String imagepath,
+    String email,
+    DateTime dob,
   ) {
     if (studentBox.containsKey(studentId)) {
       Get.snackbar('Error', 'Student ID $studentId already exist');
       return;
     }
-    final student = StudentModel(name, age, studentId, course, imagepath);
+    final student = StudentModel(
+      name,
+      age,
+      studentId,
+      course,
+      imagepath,
+      email,
+      dob,
+    );
     students.add(student);
     studentBox.put(studentId, student);
   }

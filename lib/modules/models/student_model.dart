@@ -13,11 +13,17 @@ class StudentModel {
   final String course;
   @HiveField(4)
   final String imagepath;
+  @HiveField(5)
+  final String email;
+  @HiveField(6)
+  final DateTime dob;
   StudentModel(
     this.name,
     this.age,
     this.studentid,
     this.course,
     this.imagepath,
+    this.email,
+    this.dob,
   );
 }
