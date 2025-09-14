@@ -43,6 +43,12 @@ class StudentFormController extends GetxController {
     }
   }
 
+  void goToPreviousStep() {
+    if (currentStep.value > 0) {
+      currentStep.value = 0;
+    }
+  }
+
   void resetForm() {
     nameController.clear();
     ageController.clear();
@@ -53,6 +59,26 @@ class StudentFormController extends GetxController {
     dob.value = null;
     imagePath.value = '';
     currentStep.value = 0;
+  }
+
+  void updateStudent(int studentId) {
+    if (formKeyStep2.currentState!.validate() && dob.value != null) {
+      final studentCtrl = Get.find<StudentController>();
+
+      studentCtrl.updateStudent(
+        studentId,
+        name: nameController.text.capitalize,
+        age: int.tryParse(ageController.text),
+        course: courseController.text,
+        imagePath: imagePath.value.isNotEmpty ? imagePath.value : null,
+        email: emailController.text,
+        dob: dob.value,
+      );
+
+      resetForm();
+    } else {
+      Get.snackbar("Error", "Please complete all fields");
+    }
   }
 
   void saveStudent() {

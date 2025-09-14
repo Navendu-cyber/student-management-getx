@@ -31,6 +31,7 @@ class Homescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final studentController = Get.find<StudentController>();
+    final searchController = TextEditingController();
     final isNavigating = false.obs;
 
     return Scaffold(
@@ -39,26 +40,74 @@ class Homescreen extends StatelessWidget {
         actions: const [Icon(Icons.search)],
         backgroundColor: Colors.lightBlue,
       ),
-      body: Obx(
-        () => studentController.students.isEmpty
-            ? const Center(child: Text('No Students yet'))
-            : ListView.builder(
-                itemCount: studentController.students.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Get.to(
-                        () => DetailScreen(
-                          studentDetail: studentController.students[index],
-                        ),
-                      );
-                    },
-                    child: ListCard(
-                      studentDetail: studentController.students[index],
-                    ),
-                  );
-                },
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
+              controller: searchController,
+              decoration: InputDecoration(
+                hintText: 'Search by name...',
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Get.theme.iconTheme.color,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.grey[300]!),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.grey[300]!),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Get.theme.primaryColor,
+                    width: 2,
+                  ),
+                ),
+                filled: true,
+                fillColor: Get.theme.brightness == Brightness.dark
+                    ? Colors.grey[800]
+                    : Colors.grey[100],
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
               ),
+              onChanged: (value) {
+                studentController.searchQuery.value = value;
+              },
+            ),
+          ),
+
+          Expanded(
+            child: Obx(
+              () => studentController.filteredStudents.isEmpty
+                  ? const Center(child: Text('No Students yet'))
+                  : ListView.builder(
+                      itemCount: studentController.filteredStudents.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Get.to(
+                              () => DetailScreen(
+                                studentDetail:
+                                    studentController.filteredStudents[index],
+                              ),
+                            );
+                          },
+                          child: ListCard(
+                            studentDetail:
+                                studentController.filteredStudents[index],
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.lightBlue,
