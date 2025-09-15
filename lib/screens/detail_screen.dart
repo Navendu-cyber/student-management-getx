@@ -150,7 +150,22 @@ class DetailScreen extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.redAccent,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.defaultDialog(
+                            title: 'Delete Student ',
+                            middleText: 'Are you sure to delete this student ?',
+                            textConfirm: 'Yes',
+                            textCancel: 'No',
+                            titleStyle: TextStyle(color: Colors.red),
+
+                            onConfirm: () {
+                              studentController.deleteStudent(
+                                studentDetail.studentid,
+                              );
+                            },
+                            onCancel: () => Get.back(),
+                          );
+                        },
                       ),
                     ),
                   ],

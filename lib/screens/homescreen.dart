@@ -36,8 +36,8 @@ class Homescreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Student List'),
-        actions: const [Icon(Icons.search)],
+        centerTitle: true,
+        title: const Text('Student Management'),
         backgroundColor: Colors.lightBlue,
       ),
       body: Column(

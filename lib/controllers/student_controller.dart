@@ -35,9 +35,10 @@ class StudentController extends GetxController {
     if (query.isEmpty) {
       filteredStudents.value = students;
     } else {
-      filteredStudents.value = students
-          .where((student) => student.name.toLowerCase().contains(query))
-          .toList();
+      filteredStudents.value = students.where((student) {
+        return student.name.toLowerCase().contains(query) ||
+            student.course.toLowerCase().contains(query);
+      }).toList();
     }
   }
 
@@ -107,8 +108,20 @@ class StudentController extends GetxController {
     }
   }
 
-  void deleteStudent(String id){
-    
+  void deleteStudent(int id) {
+    try {
+      if (!studentBox.containsKey(id)) {
+        Get.snackbar('Error', 'Student not found');
+        return;
+      }
+      studentBox.delete(id);
+      students.removeWhere((s) => s.studentid == id);
+      filteredStudents.removeWhere((s) => s.studentid == id);
+      Get.snackbar('Succes', 'Student deleted succesfully');
+      Get.back();
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to delete student : $e');
+    }
   }
 
   StudentModel? getStudentById(int studentId) {

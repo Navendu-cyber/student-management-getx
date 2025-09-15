@@ -29,22 +29,24 @@ class ListCard extends StatelessWidget {
               ),
             ),
 
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Name: ${studentDetail.name}",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Course: ${studentDetail.course}',
-                  style: TextStyle(fontSize: 15),
-                ),
-              ],
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Name: ${studentDetail.name}",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Course: ${studentDetail.course}',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ],
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+            const Padding(
+              padding: EdgeInsets.only(right: 8.0),
               child: Icon(Icons.chevron_right_outlined),
             ),
           ],
